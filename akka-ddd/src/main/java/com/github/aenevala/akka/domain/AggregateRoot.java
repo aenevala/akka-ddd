@@ -23,7 +23,7 @@ public abstract class AggregateRoot extends UntypedPersistentActor {
 
     @Override
     public String persistenceId() {
-        return getSelf().path().parent().parent().name() + "-" + getSelf().path().name();
+        return getSelf().path().parent().name() + "-" + getSelf().path().name();
 
     }
 

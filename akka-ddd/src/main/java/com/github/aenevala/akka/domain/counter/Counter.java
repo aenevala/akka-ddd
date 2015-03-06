@@ -54,8 +54,5 @@ public class Counter extends AggregateRoot {
 
     }
 
-    public String persistenceId() {
-        return getSelf().path().parent().parent().name() + "-" + getSelf().path().name();
-    }
 
 }
