@@ -9,6 +9,7 @@ import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
+import com.github.aenevala.akka.domain.EntityNotRegistered;
 import com.github.aenevala.akka.domain.RegisterEntity;
 import com.github.aenevala.akka.domain.counter.CounterMessages.*;
 
@@ -45,7 +46,10 @@ public class Sender extends UntypedActor {
             counterRegion.tell(new Get(id), self());
         } else if (message instanceof GetReply) {
             log.info("Received reply from {}, count: {}", ((GetReply) message).getId(), ((GetReply) message).getCount());
+        } else if (message instanceof EntityNotRegistered) {
+            log.warning("Counter {} is not created", ((EntityNotRegistered) message).getId());
         } else {
+            log.info("Received unknown message: {}", message);
             unhandled(message);
         }
 
